@@ -1,0 +1,27 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: rubygems
+    permissions:
+      contents: write   # create the GitHub release
+      id-token: write   # RubyGems Trusted Publishing (OIDC)
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+
+      # Builds the gem and publishes to RubyGems via Trusted Publishing.
+      # Requires a trusted publisher to be configured for `money-unirate-api`
+      # on rubygems.org (org=UniRate-API, repo=money-unirate-api,
+      # workflow=release.yml, environment=rubygems).
+      - uses: rubygems/release-gem@v1

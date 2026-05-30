@@ -1,0 +1,17 @@
+# Ruby / Bundler
+*.gem
+.bundle/
+vendor/bundle/
+Gemfile.lock
+.yardoc/
+_yardoc/
+doc/
+coverage/
+InstalledFiles
+pkg/
+tmp/
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/

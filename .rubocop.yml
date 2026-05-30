@@ -1,0 +1,46 @@
+AllCops:
+  TargetRubyVersion: 3.0
+  NewCops: enable
+  SuggestExtensions: false
+
+# Double quotes are idiomatic and let authors add interpolation later
+# without a mechanical rewrite.
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Metrics/MethodLength:
+  Max: 35
+
+Metrics/AbcSize:
+  Max: 30
+
+Metrics/ClassLength:
+  Max: 220
+
+# parse/handle one case/when per HTTP status — several branches is fine.
+Metrics/CyclomaticComplexity:
+  Max: 12
+
+Metrics/ParameterLists:
+  CountKeywordArgs: false
+  Max: 8
+
+# Specs and the gemspec naturally have long blocks.
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*.rb"
+    - "money-unirate-api.gemspec"
+
+Layout/LineLength:
+  Max: 120
+
+# The gem-name entry point must match the (hyphenated) gem name so
+# `require "money-unirate-api"` works.
+Naming/FileName:
+  Exclude:
+    - "lib/money-unirate-api.rb"
+
+# Dev dependencies are declared in the gemspec (the convention across the
+# UniRate client gems), not split into the Gemfile.
+Gemspec/DevelopmentDependencies:
+  Enabled: false
