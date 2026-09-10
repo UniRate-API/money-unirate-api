@@ -4,6 +4,15 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and this project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1] - 2026-09-10
+
+### Fixed
+
+- `#update_rates` no longer raises `Money::Currency::UnknownCurrency` when the
+  UniRate snapshot includes currency codes the `money` gem doesn't register
+  (e.g. crypto such as `ETH`). Unknown codes are now skipped via
+  `Money::Currency.find`. Thanks to @jeroen-nijhof for the report and fix (#1).
+
 ## [0.2.0] - 2026-06-05
 
 ### Changed

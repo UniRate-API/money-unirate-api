@@ -62,6 +62,13 @@ RSpec.describe Money::Bank::UniRate do
                 headers: { "User-Agent" => "money-unirate-api/#{MoneyUniRateApi::VERSION}" })
       ).to have_been_requested
     end
+
+    it "skips currencies the money gem doesn't know instead of raising (e.g. crypto like ETH)" do
+      stub_rates(body: { "rates" => { "EUR" => "0.90", "ETH" => "0.00042" } }.to_json)
+
+      expect { bank.update_rates }.not_to raise_error
+      expect(bank.get_rate("USD", "EUR")).to eq(BigDecimal("0.90"))
+    end
   end
 
   describe "#get_rate" do
