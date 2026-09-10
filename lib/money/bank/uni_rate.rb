@@ -71,7 +71,11 @@ class Money
       def update_rates
         rates = fetch_rates
         add_rate(base_currency, base_currency, 1)
-        rates.each { |code, value| add_rate(base_currency, code, value) }
+        rates.each do |code, value|
+          next unless Money::Currency.find(code)
+
+          add_rate(base_currency, code, value)
+        end
         @rates_updated_at = Time.now
         rates
       end
